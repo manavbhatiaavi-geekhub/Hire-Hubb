@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HireHub | Sahi Kaam, Sahi Insaan</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #f5f7fc;
+  color: #172b4d;
+}
+
+header {
+  background: white;
+  padding: 17px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 15px #00000008;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  color: #14213d;
+}
+
+.logo span { color: #246bfd; }
+
+.tagline {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+nav a {
+  text-decoration: none;
+  margin-left: 20px;
+  color: #334155;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+nav a:hover { color: #246bfd; }
+
+.hero {
+  padding: 75px 7%;
+  background: linear-gradient(120deg, #10213d, #174e83);
+  color: white;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.badge {
+  color: #ffca64;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.1;
+  margin: 20px 0;
+}
+
+.hero h1 span { color: #ffbd45; }
+
+.hero p {
+  color: #d7e4f5;
+  line-height: 1.8;
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 20px;
+  background: #246bfd;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #1454db;
+  transform: translateY(-2px);
+}
+
+.search-card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  color: #172b4d;
+  box-shadow: 0 20px 50px #0003;
+}
+
+.search-card h2 { margin-bottom: 8px; }
+
+.search-card p {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 16px;
+  border: 1px solid #dbe3ef;
+  border-radius: 9px;
+  background: #fbfcff;
+  font-size: 14px;
+}
+
+.search-card .btn { width: 100%; }
+
+.stats {
+  background: white;
+  padding: 25px 7%;
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e5eaf2;
+}
+
+.stat {
+  text-align: center;
+  font-size: 13px;
+  color: #52647a;
+}
+
+.stat strong {
+  display: block;
+  font-size: 17px;
+  color: #14213d;
+  margin-bottom: 5px;
+}
+
+section.content {
+  padding: 60px 7%;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #14213d;
+}
+
+.section-desc {
+  color: #64748b;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+}
+
+.category {
+  background: white;
+  border: 1px solid #e5eaf2;
+  padding: 22px 8px;
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.category:hover, .category.active {
+  border-color: #246bfd;
+  background: #edf3ff;
+  transform: translateY(-4px);
+}
+
+.category .emoji {
+  font-size: 31px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.category strong { font-size: 12px; }
+
+.worker-tools {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0 20px;
+}
+
+.worker-tools input,
+.worker-tools select {
+  background: white;
+  margin: 0;
+}
+
+.worker-tools input { flex: 2; }
+.worker-tools select { flex: 1; }
+
+.worker-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.worker {
+  background: white;
+  border: 1px solid #e5eaf2;
+  padding: 23px;
+  border-radius: 18px;
+  transition: 0.25s;
+  box-shadow: 0 5px 20px #14213d08;
+}
+
+.worker:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px #14213d12;
+}
+
+.worker-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 55px;
+  height: 55px;
+  display: grid;
+  place-items: center;
+  background: #edf3ff;
+  border-radius: 15px;
+  font-size: 28px;
+}
+
+.worker h3 { font-size: 17px; margin-bottom: 6px; }
+
+.trade {
+  color: #246bfd;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.line {
+  height: 1px;
+  background: #edf0f5;
+  margin: 18px 0;
+}
+
+.info {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 9px 0;
+}
+
+.worker-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.worker-actions a {
+  flex: 1;
+  text-align: center;
+  padding: 11px 5px;
+  border-radius: 9px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.call { background: #dcfce7; color: #166534; }
+.whatsapp { background: #edf3ff; color: #245bcb; }
+
+.empty {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  color: #64748b;
+  grid-column: 1 / -1;
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.how-card {
+  background: white;
+  border: 1px solid #e5eaf2;
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  background: #edf3ff;
+  color: #246bfd;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.how-card h3 { margin-bottom: 10px; }
+
+.how-card p {
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.benefit {
+  background: #eaf1ff;
+  padding: 23px;
+  border-radius: 15px;
+}
+
+.benefit h3 { margin-bottom: 10px; }
+
+.benefit p {
+  font-size: 13px;
+  color: #52647a;
+  line-height: 1.7;
+}
+
+.cta {
+  margin: 0 7% 60px;
+  background: linear-gradient(120deg, #10213d, #174e83);
+  color: white;
+  border-radius: 20px;
+  padding: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.cta h2 { margin-bottom: 10px; }
+.cta p { color: #d7e4f5; line-height: 1.6; }
+
+footer {
+  background: #0b1f33;
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+footer p {
+  color: #bdcce0;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+footer a {
+  color: #ffca64;
+  text-decoration: none;
+}
+
+@media(max-width:900px) {
+  .hero { grid-template-columns: 1fr; }
+  .categories { grid-template-columns: repeat(3, 1fr); }
+  .worker-grid { grid-template-columns: repeat(2, 1fr); }
+  .navlinks a { margin-left: 10px; }
+}
+
+@media(max-width:600px) {
+  header { padding: 14px 5%; }
+  nav a { font-size: 12px; margin-left: 8px; }
+  .hero { padding: 45px 5%; }
+  section.content { padding: 42px 5%; }
+  .categories { grid-template-columns: repeat(2, 1fr); }
+  .worker-grid, .how-grid, .benefits { grid-template-columns: 1fr; }
+  .worker-tools { flex-direction: column; }
+  .cta { margin: 0 5% 40px; padding: 25px; flex-direction: column; align-items: flex-start; }
+  .section-title { font-size: 27px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <div class="logo">Hire<span>Hub</span></div>
+    <div class="tagline">Sahi Kaam, Sahi Insaan</div>
+  </div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#workers">Workers</a>
+    <a href="#how">How it works</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="badge">YOUR LOCAL SERVICE PARTNER</div>
+    <h1>Need a helping hand?<br>Find the <span>right person.</span></h1>
+    <p>From electricians to labourers, find local workers for your everyday needs. Search, connect and discuss your work directly.</p>
+    <a class="btn" href="#workers">Explore Workers →</a>
+  </div>
+
+  <div class="search-card">
+    <h2>🔎 Find workers near you</h2>
+    <p>Choose a service and enter your area.</p>
+
+    <label for="searchTrade">What work do you need?</label>
+    <select id="searchTrade">
+      <option value="">All services</option>
+      <option>General Labourer</option>
+      <option>Electrician</option>
+      <option>Plumber</option>
+      <option>Carpenter</option>
+      <option>Painter</option>
+      <option>Gardener</option>
+      <option>AC Repair</option>
+      <option>Mason</option>
+      <option>Cleaner</option>
+      <option>Other</option>
+    </select>
+
+    <label for="searchCity">City or area</label>
+    <input id="searchCity" placeholder="Enter your city or area">
+
+    <button class="btn" onclick="applySearch()">Search Workers →</button>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><strong>📍 Local First</strong>Find services in your area</div>
+  <div class="stat"><strong>📞 Direct Contact</strong>Talk to workers directly</div>
+  <div class="stat"><strong>🤝 Skill Connect</strong>Help local skills get noticed</div>
+</div>
+
+<section class="content" id="services">
+  <h2 class="section-title">Explore Our Services</h2>
+  <p class="section-desc">Choose the service you need to find the right professional.</p>
+
+  <div class="categories">
+    <button class="category active" data-trade=""><span class="emoji">🧰</span><strong>All Services</strong></button>
+    <button class="category" data-trade="General Labourer"><span class="emoji">🧱</span><strong>Labourers</strong></button>
+    <button class="category" data-trade="Electrician"><span class="emoji">⚡</span><strong>Electricians</strong></button>
+    <button class="category" data-trade="Plumber"><span class="emoji">🔧</span><strong>Plumbers</strong></button>
+    <button class="category" data-trade="Carpenter"><span class="emoji">🪚</span><strong>Carpenters</strong></button>
+    <button class="category" data-trade="Painter"><span class="emoji">🖌️</span><strong>Painters</strong></button>
+  </div>
+</section>
+
+<section class="content" id="workers">
+  <h2 class="section-title">Find Your Worker</h2>
+  <p class="section-desc">Search profiles and contact a worker to discuss your requirements.</p>
+
+  <div class="worker-tools">
+    <input id="quickSearch" placeholder="Search name, profession or area..." oninput="renderWorkers()">
+    <select id="sortBy" onchange="renderWorkers()">
+      <option value="name">Sort by name</option>
+      <option value="trade">Sort by profession</option>
+      <option value="city">Sort by area</option>
+    </select>
+  </div>
+
+  <p id="resultCount" class="section-desc"></p>
+  <div class="worker-grid" id="workerList"></div>
+  <p class="info">Please confirm a worker's availability, experience and price directly before hiring.</p>
+</section>
+
+<section class="content" id="how">
+  <h2 class="section-title">How HireHub Works</h2>
+  <p class="section-desc">Finding local help can be simple.</p>
+
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="step">01</div>
+      <h3>Choose a Service</h3>
+      <p>Select the kind of work you need, such as plumbing, electrical work or general labour.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">02</div>
+      <h3>Find a Local Worker</h3>
+      <p>Search by profession or location and review the worker profile.</p>
+    </div>
+    <div class="how-card">
+      <div class="step">03</div>
+      <h3>Connect Directly</h3>
+      <p>Call or message the worker to discuss timing, requirements and pricing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <h2 class="section-title">Why Choose HireHub?</h2>
+  <p class="section-desc">A simple idea with a useful purpose: connect local skills with local needs.</p>
+
+  <div class="benefits">
+    <div class="benefit">
+      <h3>📱 Easy to Use</h3>
+      <p>A simple website that works on mobile phones, tablets and computers.</p>
+    </div>
+    <div class="benefit">
+      <h3>📍 Local Search</h3>
+      <p>Search worker profiles by their listed city or area.</p>
+    </div>
+    <div class="benefit">
+      <h3>🤝 Direct Connection</h3>
+      <p>Contact workers directly and agree on job details with them.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <div>
+    <h2>Sahi Kaam, Sahi Insaan.</h2>
+    <p>Your next local service connection starts with a simple search.</p>
+  </div>
+  <a href="#workers" class="btn">Find a Worker →</a>
+</div>
+
+<footer>
+  <div class="logo" style="color:white">Hire<span>Hub</span></div>
+  <p>Sahi Kaam, Sahi Insaan</p>
+  <p>Connecting local workers with people who need their skills.</p>
+  <p><a href="#services">Services</a> &nbsp; | &nbsp; <a href="#workers">Find Workers</a> &nbsp; | &nbsp; <a href="#how">How It Works</a></p>
+  <p>© <span id="year"></span> HireHub. Confirm worker details before hiring.</p>
+</footer>
+
+<script>
+// Add real worker profiles here only with their permission.
+// Replace the example contact number with a verified number before publishing.
+const workers = [
+  {
+    name: "NAMAN",
+    trade: "Electrician",
+    city: "Rohtak",
+    phone: "7082883913",
+    about: "Home wiring and basic electrical repairs.",
+    icon: "⚡"
+  }
+];
+
+const icons = {
+  "General Labourer": "🧱",
+  "Electrician": "⚡",
+  "Plumber": "🔧",
+  "Carpenter": "🪚",
+  "Painter": "🖌️",
+  "Gardener": "🌱",
+  "AC Repair": "❄️",
+  "Mason": "🏗️",
+  "Cleaner": "🧹",
+  "Other": "🧰"
+};
+
+let selectedTrade = "";
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
+function renderWorkers() {
+  const query = document.getElementById("quickSearch").value.trim().toLowerCase();
+  const city = document.getElementById("searchCity").value.trim().toLowerCase();
+  const sortBy = document.getElementById("sortBy").value;
+
+  const filtered = workers.filter(worker => {
+    const matchesTrade = !selectedTrade || worker.trade === selectedTrade;
+    const matchesCity = !city || worker.city.toLowerCase().includes(city);
+    const searchable = `${worker.name} ${worker.trade} ${worker.city} ${worker.about}`.toLowerCase();
+    const matchesQuery = !query || searchable.includes(query);
+    return matchesTrade && matchesCity && matchesQuery;
+  }).sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
+
+  document.getElementById("resultCount").textContent =
+    `${filtered.length} worker profile${filtered.length === 1 ? "" : "s"} found`;
+
+  const list = document.getElementById("workerList");
+
+  if (filtered.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        <h3>No matching workers found</h3>
+        <p style="margin-top:10px">Try another profession or city.</p>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map(worker => `
+    <article class="worker">
+      <div class="worker-head">
+        <div class="avatar">${icons[worker.trade] || "🧰"}</div>
+        <div>
+          <h3>${escapeHTML(worker.name)}</h3>
+          <div class="trade">${escapeHTML(worker.trade)}</div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="info">📍 ${escapeHTML(worker.city)}</div>
+      <div class="info">${escapeHTML(worker.about || "Contact for service details.")}</div>
+      <div class="worker-actions">
+        <a class="call" href="tel:${escapeHTML(worker.phone.replace(/[^0-9+]/g, ""))}">☎ Call Now</a>
+        <a class="whatsapp" href="https://wa.me/${escapeHTML(worker.phone.replace(/[^0-9]/g, ""))}" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+      </div>
+    </article>
+  `).join("");
+}
+
+function applySearch() {
+  selectedTrade = document.getElementById("searchTrade").value;
+  document.querySelectorAll(".category").forEach(button => {
+    button.classList.toggle("active", button.dataset.trade === selectedTrade);
+  });
+  renderWorkers();
+  document.getElementById("workers").scrollIntoView({ behavior: "smooth" });
+}
+
+document.querySelectorAll(".category").forEach(button => {
+  button.addEventListener("click", () => {
+    selectedTrade = button.dataset.trade;
+    document.getElementById("searchTrade").value = selectedTrade;
+
+    document.querySelectorAll(".category").forEach(item => {
+      item.classList.toggle("active", item === button);
+    });
+
+    renderWorkers();
+    document.getElementById("workers").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+renderWorkers();
+</script>
+
+</body>
+</html>
